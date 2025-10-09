@@ -1,0 +1,377 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+/* Navigation Bar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ff69b4; /* Pink background */
+    padding: 10px 20px;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.navbar ul li {
+    display: inline;
+}
+
+.navbar ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s;
+}
+
+.navbar ul li a:hover {
+    color: #222;
+}
+
+/* Search Bar */
+.search-container {
+    display: flex;
+    align-items: center;
+}
+
+.search-container input[type="text"] {
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+}
+
+.search-container button {
+    margin-left: 10px;
+    padding: 5px 10px;
+    background-color: #222;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-container button:hover {
+    background-color: #555;
+}
+
+/* Header Section */
+header {
+    background-color: #ff69b4; /* Pink color for header */
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+/* health-journey-selector */
+.health-journey-selector {
+  background-color: #ffe1ef;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.health-journey-selector h2 {
+  font-size: 28px;
+  color: #b3005e;
+  margin-bottom: 25px;
+}
+
+.journey-cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.journey-card {
+  background-color: #ff69b4;
+  color: white;
+  font-size: 18px;
+  padding: 15px 25px;
+  border-radius: 10px;
+  text-decoration: none;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transition: transform 0.2s, background-color 0.3s;
+}
+
+.journey-card:hover {
+  background-color: #e0559f;
+  transform: scale(1.05);
+}
+
+
+/* Feature Section */
+.feature-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 20px;
+    padding: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Feature Link Styling */
+.feature-link {
+    text-decoration: none;
+}
+
+/* Feature Card */
+.feature-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Light shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+}
+
+h2 {
+    font-size: 24px;
+    color: #ff69b4; /* Pink for headings */
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #222;
+    color: #fff;
+    margin-top: 40px;
+}
+
+/* dashboard */
+.dashboard {
+  max-width: 700px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 15px;
+  padding: 25px 30px;
+  box-shadow: 0 6px 20px rgba(214, 51, 108, 0.3);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #330029;
+}
+
+.dashboard h1 {
+  text-align: center;
+  color: #d6336c;
+  margin-bottom: 30px;
+}
+
+label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+}
+
+select {
+  width: 100%;
+  padding: 10px 15px;
+  font-size: 1.05rem;
+  border-radius: 8px;
+  border: 2px solid #d6336c;
+  margin-bottom: 30px;
+  cursor: pointer;
+  background: #fff0f6;
+  color: #330029;
+}
+
+.rings-container {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 30px;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.progress-ring {
+  width: 130px;
+  height: 130px;
+  position: relative;
+}
+
+.progress-ring svg {
+  transform: rotate(-90deg);
+}
+
+.progress-ring circle {
+  fill: transparent;
+  stroke-width: 14;
+  stroke-linecap: round;
+}
+
+.progress-ring .bg {
+  stroke: #f3d1dc;
+}
+
+.progress-ring .progress {
+  stroke: #d6336c;
+  stroke-dasharray: 314; /* 2 * PI * 50 (radius) */
+  stroke-dashoffset: 314;
+  transition: stroke-dashoffset 1s ease-out;
+}
+
+.progress-label {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.1rem;
+  text-align: center;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+.summary-section {
+  background: #ffe6f0;
+  padding: 15px 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: #550033;
+  box-shadow: 0 2px 10px rgba(214, 51, 108, 0.1);
+}
+
+/* Personalized Wellness Journey Tracker */
+.wellness-tracker {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff0f5;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(255, 105, 180, 0.2);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.wellness-tracker h2 {
+  text-align: center;
+  color: #d63384;
+  margin-bottom: 1.5rem;
+}
+
+.wellness-tracker label,
+.wellness-tracker select,
+.wellness-tracker input,
+.wellness-tracker button {
+  display: block;
+  width: 100%;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+select,
+input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+button {
+  padding: 12px;
+  background-color: #ff69b4;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background-color: #d63384;
+}
+
+.results-box {
+  margin-top: 1.5rem;
+  background: #ffe6f0;
+  padding: 1rem;
+  border-radius: 12px;
+  color: #444;
+}
+
+progress {
+  width: 100%;
+  height: 20px;
+  margin-top: 10px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+progress::-webkit-progress-bar {
+  background-color: #f3d6e3;
+  border-radius: 10px;
+}
+
+progress::-webkit-progress-value {
+  background-color: #ff69b4;
+  border-radius: 10px;
+}
+
+/* Contact Form */
+.contact-form-section {
+    padding: 40px 20px;
+    background-color: #ffe4e1;
+    text-align: center;
+}
+
+.contact-form-section h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.contact-form {
+    width: 80%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.contact-form input, .contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.contact-form button {
+    padding: 10px 20px;
+    background-color: #ff69b4;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.contact-form button:hover {
+    background-color: #ff1493;
+}

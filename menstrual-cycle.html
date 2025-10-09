@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menstrual Cycle Tracking</title>
+    <link rel="stylesheet" href="styles/menstrual styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+         body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f8f8;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: #FFB6C1;
+            padding: 20px;
+            text-align: center;
+            color: #fff;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background-color: #ff69b4;
+            padding: 15px;
+            /* display: flex; */
+            /* justify-content: center; */
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        nav ul li a:hover {
+            color: #222;
+        }
+    </style>
+</head>
+
+<body>
+   <!-- Navigation Bar -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="women.html">Home</a></li>
+            <li><a href="menstrual-cycle.html">Menstrual Cycle</a></li>
+            <li><a href="pregnancy-care.html">Pregnancy</a></li>
+            <li><a href="postpartum-care.html">Postpartum</a></li>
+            <li><a href="menopause-management.html">Menopause</a></li>
+        </ul>
+    </nav>
+
+    <!-- Header Section -->
+    <header>
+        <h1>Menstrual Cycle Tracking</h1>
+    </header>
+
+    <!-- Info section -->
+
+    <section class="info-section">
+        <p class="intro-text">
+            Understand your body's rhythms, track key health indicators, and take control of your reproductive and
+            emotional well-being through smart menstrual tracking.
+        </p>
+        <!-- <p class="instruction">* Click on any card to flip and see more details *</p> -->
+
+        <div class="flipcard">
+            <div class="card" onclick="toggleText(this, 0)">
+                <div class="card-text" id="card0">Period Prediction</div>
+            </div>
+
+            <div class="card" onclick="toggleText(this, 1)">
+                <div class="card-text" id="card1">Fertility Window</div>
+            </div>
+
+            <div class="card" onclick="toggleText(this, 2)">
+                <div class="card-text" id="card2">Health Monitoring</div>
+            </div>
+
+            <div class="card" onclick="toggleText(this, 3)">
+                <div class="card-text" id="card3">Mood Tracking</div>
+            </div>
+
+            <div class="card" onclick="toggleText(this, 4)">
+                <div class="card-text" id="card4">Doctor Summaries</div>
+            </div>
+
+            <div class="card" onclick="toggleText(this, 5)">
+                <div class="card-text" id="card5">Smart Reminders</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menstrual Cycle Phase Predictor Feature -->
+    <div id="menstrual-cycle-predictor" style="max-width:450px; margin:20px auto; font-family: Arial, sans-serif; background:#fff0f6; padding:20px; border-radius:10px; box-shadow: 0 4px 10px rgba(255,105,180,0.2);">
+
+        <h2 style="color:#ff69b4; text-align:center; margin-bottom:20px;">Menstrual Cycle Phase Predictor</h2>
+
+        <label for="lastPeriod" style="font-weight:600; color:#cc3366; display:block; margin-bottom:6px;">Last Period Start Date:</label>
+        <input type="date" id="lastPeriod" style="width:100%; padding:8px; border:1.5px solid #ff69b4; border-radius:5px; margin-bottom:15px;">
+
+        <label for="cycleLength" style="font-weight:600; color:#cc3366; display:block; margin-bottom:6px;">Average Cycle Length (days):</label>
+        <input type="number" id="cycleLength" value="28" min="20" max="45" style="width:100%; padding:8px; border:1.5px solid #ff69b4; border-radius:5px; margin-bottom:15px;">
+
+        <label for="periodLength" style="font-weight:600; color:#cc3366; display:block; margin-bottom:6px;">Period Length (days):</label>
+        <input type="number" id="periodLength" value="5" min="2" max="10" style="width:100%; padding:8px; border:1.5px solid #ff69b4; border-radius:5px; margin-bottom:20px;">
+
+        <button onclick="predictPhases()" style="background:#ff69b4; color:#fff; border:none; padding:10px 20px; border-radius:5px; font-weight:700; cursor:pointer; width:100%;">Show My Cycle Phases</button>
+
+        <div id="result" style="margin-top:25px; background:#fff; padding:15px; border-radius:8px; display:none; box-shadow: 0 2px 8px rgba(255,105,180,0.15);">
+            <h3 style="color:#cc3366; margin-bottom:15px;">Your Cycle Phases</h3>
+            <div id="phases" style="color:#333; font-weight:600;"></div>
+            <p id="nextPeriod" style="margin-top:15px; font-weight:700; color:#e91e63;"></p>
+        </div>
+    </div>
+
+
+    <h1 class="calendar-title">Interactive Calendar</h1>
+
+    <!-- Calendar & Notes Section -->
+    <div style="display: flex; gap: 20px; padding: 20px; flex-wrap: wrap; font-family: Arial, sans-serif;">
+        <!-- Left Calendar Panel -->
+        <div style="flex: 1; min-width: 300px;">
+            <!-- Calendar Header -->
+            <div
+                style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; position: relative;">
+                <button onclick="changeMonth(-1)">&#8592;</button>
+
+                <!-- Month-Year Display with Dropdown -->
+                <div style="position: relative;">
+                    <button onclick="toggleYearPicker()" id="monthYearLabel"
+                        style="padding: 6px 12px; background: #f06c9b; color: white; border-radius: 5px; border: none;">
+                        Month Year
+                    </button>
+                    <!-- Year Picker -->
+                    <div id="yearPicker"
+                        style="display: none; position: absolute; top: 40px; left: 0; background: white; border: 1px solid #ccc; padding: 10px; z-index: 10;">
+                        <div id="yearGrid" style="display: grid; grid-template-columns: repeat(4, 60px); gap: 10px;">
+                        </div>
+                    </div>
+                    <!-- Month Picker -->
+                    <div id="monthPicker"
+                        style="display: none; position: absolute; top: 40px; left: 0; background: white; border: 1px solid #ccc; padding: 10px; z-index: 10;">
+                        <div id="monthGrid" style="display: grid; grid-template-columns: repeat(3, 80px); gap: 10px;">
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="changeMonth(1)">&#8594;</button>
+                <button onclick="goToToday()" style="margin-left: 10px;">Today</button>
+            </div>
+
+            <!-- Days Header -->
+            <div style="display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; font-weight: bold;">
+                <div>Sun</div>
+                <div>Mon</div>
+                <div>Tue</div>
+                <div>Wed</div>
+                <div>Thu</div>
+                <div>Fri</div>
+                <div>Sat</div>
+            </div>
+
+            <!-- Calendar Grid -->
+            <div id="calendarDays"
+                style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; margin-top: 5px;"></div>
+        </div>
+
+        <!-- Notes Panel -->
+        <div style="flex: 1; min-width: 300px;">
+            <h3>Saved Notes for <span id="noteMonthLabel"></span></h3>
+            <div id="notesList"
+                style="max-height: 400px; overflow-y: auto; background: #f9f2f5; padding: 10px; border-radius: 8px; border: 1px solid #ccc;">
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Notes -->
+    <div id="noteModal"
+        style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); justify-content:center; align-items:center; z-index:100;">
+        <div style="background:white; padding:20px; border-radius:8px; min-width: 300px; position: relative;">
+            <button onclick="closeModal()"
+                style="position:absolute; top:10px; right:10px; background:red; color:white; border:none; border-radius:50%; width:25px; height:25px; font-weight:bold;">×</button>
+            <h3>Add Note for <span id="selectedDateLabel"></span></h3>
+            <textarea id="noteInput" rows="4" style="width:100%; margin-top:10px;"></textarea>
+            <br>
+            <button onclick="saveNote()"
+                style="margin-top: 10px; background: #28a745; color: white; padding: 6px 12px; border: none; border-radius: 4px;">Save
+                Note</button>
+        </div>
+        
+    </div>
+    </div>
+
+    <!-- Video Section with Search -->
+    <section class="video-section" id="video_section" style="padding-left: 20px;">
+        <h2>Related Videos</h2>
+
+        <!-- Search Bar for Videos -->
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search videos by title..." onkeyup="filterVideos()" style="width: 1099px; height: 55px; border-radius: 40px; 
+            padding-left: 30px;">
+        </div>
+
+        <!-- Video Container -->
+        <div id="videoContainer" class="video-container" style="display: grid; grid-template-columns: 1fr 1fr 1fr;
+        row-gap: 30px; column-gap: 30px;">
+            <!-- Each video has a title and iframe -->
+            <div class="video-card" data-title="Menstrual Cycle">
+                <h3>Understanding Your Menstrual Cycle</h3>
+                <iframe width="300" height="200" style="object-fit: contain;"
+                    src="https://www.youtube.com/embed/42WIByexiXc?si=1x1Yka-5od9ZetRR" title="Menstrual Cycle"
+                    frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="video-card" data-title="Ovulation cycle and Menstrual Cycle">
+                <h3>Ovulation cycle and Menstrual Cycle</h3>
+                <iframe width="300" height="200" style="object-fit: contain;"
+                    src="https://www.youtube.com/embed/ZNM8KsSQerk?si=Eqq8PBGel9C2EKih"
+                    title="Ovulation cycle and Menstrual Cycle" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="video-card" data-title="How to Track Your Menstrual Cycle">
+                <h3>How to Track Your Menstrual Cycle</h3>
+                <iframe width="300" height="200" style="object-fit: contain;"
+                    src="https://www.youtube.com/embed/BLUD2PA7D5g?si=ShK70nebrnExrEQ2"
+                    title="How to Track Your Menstrual Cycle" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="video-card" data-title="What Your Menstrual Cycle Says About Your Health">
+                <h3>What Your Menstrual Cycle Says About Your Health</h3>
+                <iframe width="300" height="200" src="https://www.youtube.com/embed/si-GEj49PNM?si=ngcN8YM2vvBMJkha"
+                    title="What Your Menstrual Cycle Says About Your Health" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="video-card" data-title="CHANGES IN MENSTRUAL CYCLE LENGTH? | Why It Happens & What You Need To Know!">
+                <h3>CHANGES IN MENSTRUAL CYCLE LENGTH? | Why It Happens & What You Need To Know!</h3>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/EG5Ddj2imMU?si=-NW2t3uLQMt0S9TT"
+                    title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+            <div class="video-card" data-title="Say Good Bye to Irregular Periods Problem">
+                <h3>Say Good Bye to Irregular Periods Problem</h3>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/SSC12rZdU6M?si=O9Z2FqE81tRSUmbz" 
+                    title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer style="padding-left: 20px;">
+        <p>&copy; 2024 Women’s Health Care. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript Enhancement Opportunities -->
+    <!-- TODO: Add calendar sync with Google Calendar / iCal -->
+    <!-- TODO: Implement data visualization for cycle patterns over time -->
+    <!-- TODO: Add symptom correlation analysis (e.g., mood vs. cycle phase) -->
+    <!-- TODO: Create shareable cycle reports for doctor visits -->
+    <!-- TODO: Add voice input for quick note taking -->
+    <!-- TODO: Implement machine learning for more accurate predictions -->
+    <script src="scripts/script.js"></script>
+    <script>
+        // Function to filter videos based on the search input
+        function filterVideos() {
+            const searchQuery = document.getElementById('searchInput').value.toLowerCase();
+            const videos = document.querySelectorAll('.video-card');
+
+            videos.forEach(video => {
+                const title = video.getAttribute('data-title').toLowerCase();
+                if (title.includes(searchQuery)) {
+                    video.style.display = 'block';
+                } else {
+                    video.style.display = 'none';
+                }
+            });
+        }
+    
+    const cards = [
+      {
+        title: "Period Prediction",
+        desc: "Stay prepared with accurate predictions and symptom tracking like cramps, mood, and flow changes."
+      },
+      {
+        title: "Fertility Window",
+        desc: "Track ovulation and fertile days to plan or avoid pregnancy naturally and confidently."
+      },
+      {
+        title: "Health Monitoring",
+        desc: "Detect irregularities and manage conditions like PCOS, endometriosis, and hormonal imbalance early."
+      },
+      {
+        title: "Mood Tracking",
+        desc: "Understand emotional patterns and mood swings throughout your cycle for better mental health."
+      },
+      {
+        title: "Doctor Summaries",
+        desc: "Generate medical reports with cycle history and symptoms to support informed diagnoses."
+      },
+      {
+        title: "Smart Reminders",
+        desc: "Set personalized reminders for period start, hydration, exercise, medication, and more."
+      }
+    ];
+
+    function toggleText(cardElement, index) {
+      const content = cardElement.querySelector(".card-text");
+      const current = content.textContent.trim();
+      content.textContent = current === cards[index].title ? cards[index].desc : cards[index].title;
+    }
+
+    // period tracker
+        function formatDate(date) {
+            return date.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+        }
+
+        function predictPhases() {
+            const lastPeriodInput = document.getElementById('lastPeriod').value;
+            const cycleLengthInput = parseInt(document.getElementById('cycleLength').value) || 28;
+            const periodLengthInput = parseInt(document.getElementById('periodLength').value) || 5;
+
+            if (!lastPeriodInput) {
+            alert("Please enter your last period start date.");
+            return;
+            }
+
+            const lastPeriodDate = new Date(lastPeriodInput);
+
+            // Menstruation phase
+            const menstruationStart = lastPeriodDate;
+            const menstruationEnd = new Date(menstruationStart);
+            menstruationEnd.setDate(menstruationEnd.getDate() + periodLengthInput - 1);
+
+            // Follicular phase: from end of menstruation to day before fertile window
+            const follicularStart = new Date(menstruationEnd);
+            follicularStart.setDate(follicularStart.getDate() + 1);
+
+            // Ovulation approx day (cycle length - 14 days)
+            const ovulationDay = cycleLengthInput - 14;
+            const ovulationStart = new Date(lastPeriodDate);
+            ovulationStart.setDate(ovulationStart.getDate() + ovulationDay - 2); // fertile window start (2 days before ovulation)
+            const ovulationEnd = new Date(ovulationStart);
+            ovulationEnd.setDate(ovulationEnd.getDate() + 4); // fertile window 5 days total
+
+            // Follicular phase ends the day before fertile window
+            const follicularEnd = new Date(ovulationStart);
+            follicularEnd.setDate(follicularEnd.getDate() - 1);
+
+            // Luteal phase: from day after fertile window to day before next period
+            const lutealStart = new Date(ovulationEnd);
+            lutealStart.setDate(lutealStart.getDate() + 1);
+            const lutealEnd = new Date(lastPeriodDate);
+            lutealEnd.setDate(lutealEnd.getDate() + cycleLengthInput - 1);
+
+            // Next period prediction
+            const nextPeriodDate = new Date(lastPeriodDate);
+            nextPeriodDate.setDate(nextPeriodDate.getDate() + cycleLengthInput);
+
+            const output = `
+            <p><strong>Menstruation:</strong> ${formatDate(menstruationStart)} to ${formatDate(menstruationEnd)}</p>
+            <p><strong>Follicular Phase:</strong> ${formatDate(follicularStart)} to ${formatDate(follicularEnd)}</p>
+            <p><strong>Ovulation / Fertile Window:</strong> ${formatDate(ovulationStart)} to ${formatDate(ovulationEnd)}</p>
+            <p><strong>Luteal Phase:</strong> ${formatDate(lutealStart)} to ${formatDate(lutealEnd)}</p>
+            `;
+
+            const resultDiv = document.getElementById('result');
+            const phasesDiv = document.getElementById('phases');
+            const nextPeriodP = document.getElementById('nextPeriod');
+
+            phasesDiv.innerHTML = output;
+            nextPeriodP.innerHTML = `<strong>Predicted Next Period Start Date:</strong> ${formatDate(nextPeriodDate)}`;
+            resultDiv.style.display = 'block';
+        }
+
+        // calendar
+        const months = ["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"];
+        let currentDate = new Date();
+        let selectedDate = null;
+
+        const calendarDays = document.getElementById("calendarDays");
+        const monthYearLabel = document.getElementById("monthYearLabel");
+        const noteMonthLabel = document.getElementById("noteMonthLabel");
+
+        function renderCalendar() {
+            calendarDays.innerHTML = "";
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth();
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const today = new Date();
+
+            monthYearLabel.textContent = `${months[month]} ${year}`;
+            noteMonthLabel.textContent = `${months[month]} ${year}`;
+
+            for (let i = 0; i < firstDay; i++) {
+                const empty = document.createElement("div");
+                calendarDays.appendChild(empty);
+            }
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                const btn = document.createElement("button");
+                btn.textContent = day;
+                btn.style.padding = "10px";
+                btn.style.borderRadius = "4px";
+                btn.style.border = "1px solid #ccc";
+                btn.style.background = "white";
+                btn.style.cursor = "pointer";
+                btn.style.color= "black";
+                btn.innerHTML = day;
+
+                const noteKey = `note-${year}-${month + 1}-${day}`;
+                if (localStorage.getItem(noteKey)) {
+                    btn.style.background = "#ffdeea";
+                    btn.style.borderColor = "#e91e63";
+                    btn.style.fontWeight = "bold";
+                }
+
+                if (
+                    day === today.getDate() &&
+                    month === today.getMonth() &&
+                    year === today.getFullYear()
+                ) {
+                    btn.style.outline = "2px solid #2196f3";
+                }
+
+                btn.onclick = () => {
+                    selectedDate = { year, month, day };
+                    document.getElementById("noteInput").value = localStorage.getItem(noteKey) || "";
+                    document.getElementById("selectedDateLabel").textContent = `${months[month]} ${day}, ${year}`;
+                    document.getElementById("noteModal").style.display = "flex";
+                };
+                
+                calendarDays.appendChild(btn);
+            }
+
+            renderNoteList();
+        }
+
+        function changeMonth(offset) {
+            currentDate.setMonth(currentDate.getMonth() + offset);
+            renderCalendar();
+        }
+
+        function goToToday() {
+            currentDate = new Date();
+            renderCalendar();
+        }
+
+        function closeModal() {
+            document.getElementById("noteModal").style.display = "none";
+        }
+
+        function saveNote() {
+            const { year, month, day } = selectedDate;
+            const key = `note-${year}-${month + 1}-${day}`;
+            const content = document.getElementById("noteInput").value;
+            if (content.trim()) {
+                localStorage.setItem(key, content);
+            } else {
+                localStorage.removeItem(key);
+            }
+            closeModal();
+            renderCalendar();
+        }
+
+        function renderNoteList() {
+            const notesList = document.getElementById("notesList");
+            notesList.innerHTML = "";
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth() + 1;
+            for (let i = 1; i <= 31; i++) {
+                const key = `note-${year}-${month}-${i}`;
+                const note = localStorage.getItem(key);
+                if (note) {
+                    const item = document.createElement("div");
+                    item.style.marginBottom = "10px";
+                    item.innerHTML = `<strong>${months[month - 1]} ${i}:</strong><br><span>${note}</span>`;
+                    item.style.background = "#ffe5ec";
+                    item.style.padding = "8px";
+                    item.style.borderRadius = "5px";
+                    notesList.appendChild(item);
+                }
+            }
+        }
+
+        // Fast Navigation Grids
+        function toggleYearPicker() {
+            document.getElementById("yearPicker").style.display = 'block';
+            document.getElementById("monthPicker").style.display = 'none';
+            renderYearGrid();
+        }
+
+        function renderYearGrid() {
+            const grid = document.getElementById("yearGrid");
+            grid.innerHTML = "";
+            const startYear = currentDate.getFullYear() - 6;
+            for (let i = 0; i < 12; i++) {
+                const yearBtn = document.createElement("button");
+                yearBtn.textContent = startYear + i;
+                yearBtn.style.padding = "6px";
+                yearBtn.onclick = () => {
+                    currentDate.setFullYear(startYear + i);
+                    document.getElementById("yearPicker").style.display = "none";
+                    renderMonthGrid();
+                };
+                grid.appendChild(yearBtn);
+            }
+        }
+
+        function renderMonthGrid() {
+            const grid = document.getElementById("monthGrid");
+            grid.innerHTML = "";
+            document.getElementById("monthPicker").style.display = 'block';
+            months.forEach((m, idx) => {
+                const monthBtn = document.createElement("button");
+                monthBtn.textContent = m;
+                monthBtn.style.padding = "6px";
+                monthBtn.onclick = () => {
+                    currentDate.setMonth(idx);
+                    document.getElementById("monthPicker").style.display = "none";
+                    renderCalendar();
+                };
+                grid.appendChild(monthBtn);
+            });
+        }
+
+        // Close pickers on outside click
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('#monthYearLabel') &&
+                !e.target.closest('#yearPicker') &&
+                !e.target.closest('#monthPicker')) {
+                document.getElementById("yearPicker").style.display = "none";
+                document.getElementById("monthPicker").style.display = "none";
+            }
+        });
+
+        renderCalendar();
+  
+  </script>
+
+</body>
+
+</html>

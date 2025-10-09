@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women's Health Feature</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <style>
+         body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f8f8;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: #ff69b4;
+            padding: 20px;
+            text-align: center;
+            color: #fff;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background-color: #ff69b4;
+            padding: 15px;
+            /* display: flex; */
+            /* justify-content: center; */
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        nav ul li a:hover {
+            color: #222;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <ul>
+             <li><a href="women.html">Home</a></li>
+            <li><a href="menstrual-cycle.html">Menstrual Cycle</a></li>
+            <li><a href="pregnancy-care.html">Pregnancy</a></li>
+            <li><a href="postpartum-care.html">Postpartum</a></li>
+            <li><a href="menopause-management.html">Menopause</a></li>
+        </ul>
+
+        <!-- Search Bar -->
+        <div class="search-container">
+            <input type="text" placeholder="Search..." id="searchInput">
+            <button type="submit" onclick="searchFeature()">Search</button>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header>
+        <h1>Women’s Health Care</h1>
+    </header>
+
+    <!-- health-journey-selector -->
+    <section class="health-journey-selector">
+        <h2>Where are you in your health journey?</h2>
+        <div class="journey-cards">
+            <a href="menstrual-cycle.html" class="journey-card">🩸 MENSTRUAL</a>
+            <a href="pregnancy-care.html" class="journey-card">🤰 PREGNANCY</a>
+            <a href="postpartum-care.html" class="journey-card">👩‍🍼 POSTPARTUM</a>
+            <a href="menopause-management.html" class="journey-card">🦋 MENOPAUSE</a>
+        </div>
+    </section>
+
+
+    <!-- Feature Section -->
+    <section class="feature-section">
+        <a href="menstrual-cycle.html" class="feature-link">
+            <div class="feature-card" id="menstrual">
+                <h2>Menstrual Cycle Tracking</h2>
+                <p>Track your cycle with accurate predictions and reminders for your periods, ovulation, and fertile days.</p>
+            </div>
+        </a>
+
+        <a href="pregnancy-care.html" class="feature-link">
+            <div class="feature-card" id="pregnancy">
+                <h2>Pregnancy Care</h2>
+                <p>Get personalized advice, baby development updates, and health tips for each trimester of your pregnancy.</p>
+            </div>
+        </a>
+
+        <a href="postpartum-care.html" class="feature-link">
+            <div class="feature-card" id="postpartum">
+                <h2>Postpartum Care</h2>
+                <p>Support and resources for postpartum recovery, including physical and emotional well-being tips.</p>
+            </div>
+        </a>
+
+        <a href="menopause-management.html" class="feature-link">
+            <div class="feature-card" id="menopause">
+                <h2>Menopause Management</h2>
+                <p>Learn about symptoms, treatments, and lifestyle changes to help you manage menopause effectively.</p>
+            </div>
+        </a>
+    </section>
+
+    <!-- dashboard -->
+    <div class="dashboard">
+        <h1>Hormone Harmony Dashboard</h1>
+
+        <label for="phaseSelect">Select Menstrual Phase:</label>
+        <select id="phaseSelect" onchange="updateDashboard()">
+            <option value="menstrual">Menstrual</option>
+            <option value="follicular">Follicular</option>
+            <option value="ovulation">Ovulation</option>
+            <option value="luteal">Luteal</option>
+        </select>
+
+        <div class="rings-container">
+            <div class="progress-ring" id="estrogenRing">
+            <svg width="130" height="130">
+                <circle class="bg" r="50" cx="65" cy="65" />
+                <circle class="progress" r="50" cx="65" cy="65" />
+            </svg>
+            <div class="progress-label">Estrogen<br><span id="estrogenVal">0%</span></div>
+            </div>
+
+            <div class="progress-ring" id="progesteroneRing">
+            <svg width="130" height="130">
+                <circle class="bg" r="50" cx="65" cy="65" />
+                <circle class="progress" r="50" cx="65" cy="65" />
+            </svg>
+            <div class="progress-label">Progesterone<br><span id="progesteroneVal">0%</span></div>
+            </div>
+
+            <div class="progress-ring" id="lhRing">
+            <svg width="130" height="130">
+                <circle class="bg" r="50" cx="65" cy="65" />
+                <circle class="progress" r="50" cx="65" cy="65" />
+            </svg>
+            <div class="progress-label">LH(Luteinizing Hormone)<br><span id="lhVal">0%</span></div>
+            </div>
+        </div>
+
+        <div id="moodSummary" class="summary-section"></div>
+        <div id="symptomsTips" class="summary-section"></div>
+    </div>
+
+    <!-- Personalized Wellness Journey Tracker -->
+    <div class="wellness-tracker">
+    <h2>💖 Personalized Wellness Journey</h2>
+
+    <label for="phaseSelect">Select Your Phase:</label>
+    <select id="phaseSelect" onchange="showPhaseInputs()">
+        <option value="" disabled selected>Choose phase</option>
+        <option value="menstrual">🌸 Menstrual Cycle</option>
+        <option value="pregnancy">🤰 Pregnancy</option>
+        <option value="postpartum">🍼 Postpartum</option>
+        <option value="menopause">🔥 Menopause</option>
+    </select>
+
+        <!-- Dynamic Inputs container -->
+        <div id="dynamicInputs" class="dynamic-inputs"></div>
+
+        <button onclick="showWellnessTips()">Show Tips</button>
+
+        <div id="results" class="results-box"></div>
+    </div>
+
+
+     <!-- Contact Form Section -->
+    <section class="contact-form-section">
+        <h2>Need Personalized Support?</h2>
+        <form class="contact-form">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" rows="5" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 Women’s Health Care. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript Enhancement Opportunities -->
+    <!-- TODO: Convert inline scripts to external modules for better maintainability -->
+    <!-- TODO: Add data persistence across sessions using IndexedDB -->
+    <!-- TODO: Implement real-time cycle predictions using AI/ML algorithms -->
+    <!-- TODO: Add export functionality for health reports (PDF/CSV) -->
+    <!-- TODO: Implement notification system for period predictions and reminders -->
+    <script src="scripts/script.js"></script>
+    <script>
+        function searchFeature() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const cards = document.querySelectorAll('.feature-card');
+            
+            cards.forEach(card => {
+                if (card.textContent.toLowerCase().includes(query)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // dashboard
+        const hormoneLevels = {
+        menstrual: { estrogen: 30, progesterone: 20, lh: 25, mood: "😔 Low energy, sensitive mood", symptoms: "Cramps, fatigue, bloating", tips: "Rest, hydration, gentle stretching" },
+        follicular: { estrogen: 55, progesterone: 25, lh: 40, mood: "🙂 Growing energy and focus", symptoms: "Mild headaches, slight acne", tips: "Exercise, balanced diet, mindfulness" },
+        ovulation: { estrogen: 90, progesterone: 30, lh: 90, mood: "😃 High energy, social and confident", symptoms: "Breast tenderness, slight bloating", tips: "Socialize, light workouts, hydration" },
+        luteal: { estrogen: 60, progesterone: 80, lh: 50, mood: "😕 Mood swings, irritability possible", symptoms: "Bloating, fatigue, cravings", tips: "Healthy snacks, rest, stress management" },
+        };
+
+        function setProgress(circle, percent) {
+        const radius = circle.r.baseVal.value;
+        const circumference = 2 * Math.PI * radius;
+        const offset = circumference - (percent / 100) * circumference;
+        circle.style.strokeDashoffset = offset;
+        }
+
+        function updateDashboard() {
+        const phase = document.getElementById('phaseSelect').value;
+        const levels = hormoneLevels[phase];
+
+        // Update rings
+        setProgress(document.querySelector('#estrogenRing .progress'), levels.estrogen);
+        setProgress(document.querySelector('#progesteroneRing .progress'), levels.progesterone);
+        setProgress(document.querySelector('#lhRing .progress'), levels.lh);
+
+        // Update values
+        document.getElementById('estrogenVal').textContent = levels.estrogen + '%';
+        document.getElementById('progesteroneVal').textContent = levels.progesterone + '%';
+        document.getElementById('lhVal').textContent = levels.lh + '%';
+
+        // Update mood & symptoms/tips
+        document.getElementById('moodSummary').innerHTML = `<strong>Mood:</strong> ${levels.mood}`;
+        document.getElementById('symptomsTips').innerHTML = `<strong>Common Symptoms:</strong> ${levels.symptoms}<br><strong>Tips:</strong> ${levels.tips}`;
+        }
+
+        // Initialize dashboard on load
+        window.onload = updateDashboard;
+
+        // personalized tracker
+        function showPhaseInputs() {
+            const phase = document.getElementById('phaseSelect').value;
+            const container = document.getElementById('dynamicInputs');
+            container.innerHTML = '';
+
+            if (phase === 'menstrual') {
+                container.innerHTML = `
+                <label for="cycleDay">Day of Cycle (1–28):</label>
+                <input type="number" id="cycleDay" min="1" max="28" placeholder="Enter day" />
+                `;
+            } else if (phase === 'pregnancy') {
+                container.innerHTML = `
+                <label for="trimester">Select Trimester:</label>
+                <select id="trimester">
+                    <option value="" disabled selected>Select trimester</option>
+                    <option value="1">First Trimester</option>
+                    <option value="2">Second Trimester</option>
+                    <option value="3">Third Trimester</option>
+                </select>
+                `;
+            } else if (phase === 'postpartum') {
+                container.innerHTML = `
+                <label for="weeksPostpartum">Weeks Postpartum (0–24):</label>
+                <input type="number" id="weeksPostpartum" min="0" max="24" placeholder="Enter weeks" />
+                `;
+            } else if (phase === 'menopause') {
+                container.innerHTML = `
+                <label for="menopausePhase">Select Menopause Phase:</label>
+                <select id="menopausePhase">
+                    <option value="" disabled selected>Select phase</option>
+                    <option value="perimenopause">Perimenopause</option>
+                    <option value="menopause">Menopause</option>
+                    <option value="postmenopause">Postmenopause</option>
+                </select>
+                `;
+            }
+        }
+
+        function showWellnessTips() {
+            const phase = document.getElementById('phaseSelect').value;
+            const results = document.getElementById('results');
+
+            if (!phase) {
+                alert('Please select a phase.');
+                return;
+            }
+
+            let phaseName = '';
+            let tips = '';
+            let progressPercent = 0;
+
+            if (phase === 'menstrual') {
+                const day = Number(document.getElementById('cycleDay')?.value);
+                if (!day || day < 1 || day > 28) {
+                alert('Please enter a valid cycle day (1–28).');
+                return;
+                }
+                phaseName = 'Menstrual Cycle - Day ' + day;
+                tips = 'Stay hydrated, eat balanced meals, and try light exercise to relieve cramps and boost mood.';
+                progressPercent = (day / 28) * 100;
+
+            } else if (phase === 'pregnancy') {
+                const trimester = document.getElementById('trimester')?.value;
+                if (!trimester) {
+                alert('Please select a trimester.');
+                return;
+                }
+                const trimesterNames = { '1': 'First', '2': 'Second', '3': 'Third' };
+                const trimesterTips = {
+                '1': 'Focus on prenatal vitamins, rest, and avoid harmful substances.',
+                '2': 'Stay active with safe exercises and monitor fetal growth.',
+                '3': 'Prepare for delivery, stay calm, and keep regular checkups.'
+                };
+                phaseName = `Pregnancy - ${trimesterNames[trimester]} Trimester`;
+                tips = trimesterTips[trimester];
+                progressPercent = (trimester / 3) * 100;
+
+            } else if (phase === 'postpartum') {
+                const weeks = Number(document.getElementById('weeksPostpartum')?.value);
+                if (isNaN(weeks) || weeks < 0 || weeks > 24) {
+                alert('Please enter valid weeks postpartum (0–24).');
+                return;
+                }
+                phaseName = `Postpartum - Week ${weeks}`;
+                tips = 'Rest, hydrate, eat well, and seek emotional support. Healing takes time.';
+                progressPercent = (weeks / 24) * 100;
+
+            } else if (phase === 'menopause') {
+                const menopausePhase = document.getElementById('menopausePhase')?.value;
+                if (!menopausePhase) {
+                alert('Please select a menopause phase.');
+                return;
+                }
+                const tipsMap = {
+                'perimenopause': 'Track symptoms, adjust diet, and consult your doctor about relief options.',
+                'menopause': 'Discuss HRT if needed, and focus on bone and heart health.',
+                'postmenopause': 'Get regular screenings and maintain an active lifestyle.'
+                };
+                const labelMap = {
+                'perimenopause': 'Perimenopause',
+                'menopause': 'Menopause',
+                'postmenopause': 'Postmenopause'
+                };
+                phaseName = 'Menopause Phase - ' + labelMap[menopausePhase];
+                tips = tipsMap[menopausePhase];
+                progressPercent = 100; // Menopause not tracked numerically
+            }
+
+            results.innerHTML = `
+                <h3>${phaseName}</h3>
+                <p><strong>Wellness Tips:</strong> ${tips}</p>
+                <p><strong>Progress:</strong> ${progressPercent.toFixed(1)}%</p>
+                <progress value="${progressPercent}" max="100"></progress>
+            `;
+        }
+    </script>
+</body>
+</html>
