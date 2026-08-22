@@ -146,12 +146,6 @@ We welcome contributions to HerHealthHub! If you'd like to contribute:
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## Contributors
-
-**Developed by Chanda Sushmasri**
-
-Special thanks to all contributors who help make HerHealthHub better for women everywhere.
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
